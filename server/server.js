@@ -2,14 +2,22 @@ const app = require('express')()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const questions = require('./questions.json')
+const cors = require('cors')
+
+app.use(cors())
 
 const players = []
+let result = []
 
 function sleep (ms) {
   return new Promise(resolve => {
     setTimeout(resolve, ms)
   })
 }
+
+app.get('/result', (_req, res) => {
+  res.status(200).send(players)
+})
 
 io.on('connection', socket => {
   players.push({ id: socket.id })
@@ -27,13 +35,8 @@ io.on('connection', socket => {
     await sleep(10000)
     io.emit('question', selectedQuestions[1])
     await sleep(10000)
+    result = result.slice(0)
     io.emit('end-of-game', players)
-    // selectedQuestions.forEach(async question => {
-    //   socket.emit('question', question)
-    //   await setTimeout(() => {
-    //     console.log('Wait over!')
-    //   }, 10000)
-    // })
   })
 
   socket.on('disconnect', () => {
