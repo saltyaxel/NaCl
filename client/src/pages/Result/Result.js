@@ -3,16 +3,28 @@ import './Style.css';
 import Container from '@material-ui/core/Container';
 import { Button, makeStyles, Typography } from '@material-ui/core';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import { useHistory } from 'react-router-dom';
+const classNames = require('classnames');
+
 const useStyles = makeStyles(() => ({
   container: {
     height: "100%"
   },
   header: {
-    fontWeight: "lighter"
+    fontWeight: "lighter",
+    marginTop: "1rem"
   },
   button: {
-    marginLeft: "1rem"
-  }
+    marginTop: "1rem"
+  },
+  connectedPlayersHeader: {
+    marginBottom: "0"
+  },
 }))
 
 const Home = () => {
@@ -24,18 +36,49 @@ const Home = () => {
     const getResult = async () => {
       const res = await fetch('http://localhost:8000/result')
       const data = await res.json()
-      setResult(data)
+      console.log(data)
+      const sortedData = data.sort( (a, b) => {
+        if(a.points < b.points) {
+          return 1
+        }
+        if(a.points > b.points) {
+          return -1
+        }
+        return 0
+      })
+      setResult(sortedData)
     }
-    
     getResult()
-
   }, [])
+
+  let history = useHistory()
+  const playAgain = () => {
+    history.push('/play')
+  }
 
   return (
     <Container className={classes.container} maxWidth="lg">
-      <Typography variant="h4">And the winner is...</Typography>
-      <Button variant="contained" color="primary">Play Again</Button>
-      { result.map(player => <li>{player.name} - Points: {player.points}</li>)}
+      <Typography className={classNames(classes.connectedPlayersHeader, classes.header)} variant="h4">
+          Scoreboard
+        </Typography>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell align="right">Score</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {result.map(player => (
+              <TableRow key={player.id}>
+                <TableCell component="th" scope="row">{player.name}</TableCell>
+                <TableCell align="right">{player.points}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+      <Button className={classes.button} onClick={playAgain} variant="contained" size="large" color="primary">Play Again?</Button>
     </Container>
   );
 }

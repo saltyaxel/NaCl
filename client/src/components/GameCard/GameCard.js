@@ -39,7 +39,7 @@ export default function GameCard(props) {
         <CardMedia
           className={classes.media}
           image={image}
-          title="Contemplative Reptile"
+          title={props.image}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

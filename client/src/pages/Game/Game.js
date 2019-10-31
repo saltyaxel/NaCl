@@ -7,11 +7,23 @@ import AnswerCard from '../../components/AnswerCard/AnswerCard'
 import io from 'socket.io-client'
 import { makeStyles, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+// import ReactCountdownClock from 'react-countdown-clock'
+
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
+const classNames = require('classnames');
 
 const useStyles = makeStyles(() => ({
   header: {
     fontWeight: "lighter",
     margin: "1rem"
+  },
+  connectedPlayersHeader: {
+    marginBottom: "0"
   }
 }))
 
@@ -22,6 +34,7 @@ const Game = () => {
   const [players, setPlayers] = useState([])
   const [gameStarted, setGameStarted] = useState(false)
   const [question, setQuestion] = useState({ question: "", 1: "1", 2: "2", 3: "3", 4: "4", correct: "4" })
+  const [questionAnswered, setQuestionAnswered] = useState(false)
   let history = useHistory()
 
   useEffect(() => {
@@ -40,6 +53,7 @@ const Game = () => {
     })
 
     socket.on('question', data => {
+      setQuestionAnswered(false)
       setGameStarted(true)
       setQuestion(data)
     })
@@ -54,24 +68,45 @@ const Game = () => {
   }
 
   const postAnswer = (answer) => {
-    if(answer === question.correct) {
-      socket.emit("answer", ({
-        points: 1
-      }))
-    } else {
-      socket.emit("answer", ({
-        points: 0
-      }))
+    setQuestionAnswered(true)
+    if(!questionAnswered) {
+      if(answer === question.correct) {
+        socket.emit("answer", ({
+          points: 1
+        }))
+      } else {
+        socket.emit("answer", ({
+          points: 0
+        }))
+      }
     }
   }
 
   return (
     <div>
+
       <Container maxWidth="lg">
-        <p>Connected Players</p>
-        <ul>
-          { players.map(player => <li>{player.name} - Points: {player.points}</li>)}
-        </ul>
+
+        <Typography className={classNames(classes.connectedPlayersHeader, classes.header)} variant="h4">
+          Connected Players
+        </Typography>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell align="right">Score</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {players.map(player => (
+              <TableRow key={player.id}>
+                <TableCell component="th" scope="row">{player.name}</TableCell>
+                <TableCell align="right">{player.points}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
         { !gameStarted ? (
         <div>
           <Typography className={classes.header} variant="h4">
@@ -107,24 +142,28 @@ const Game = () => {
         ) : (  
         <div>
         <Typography className={classes.header} variant="h4">
-            Question - {question.question}
+            {question.question}
         </Typography>
         <div className="games-container">
           <AnswerCard {...{
             option: question.option_1,
-            postAnswer: () => { postAnswer(question.option_1) }
+            postAnswer: () => { postAnswer(question.option_1) },
+            color: "orange"
           }} />
           <AnswerCard {...{
             option: question.option_2,
-            postAnswer: () => { postAnswer(question.option_2) }
+            postAnswer: () => { postAnswer(question.option_2) },
+            color: "green"
           }} />
           <AnswerCard {...{
             option: question.option_3,
-            postAnswer: () => { postAnswer(question.option_3) }
+            postAnswer: () => { postAnswer(question.option_3) },
+            color: "blue"
           }} />
           <AnswerCard {...{
             option: question.option_4,
-            postAnswer: () => { postAnswer(question.option_4) }
+            postAnswer: () => { postAnswer(question.option_4) },
+            color: "yellow"
           }} />
         </div>
         </div>

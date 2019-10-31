@@ -51,6 +51,7 @@ io.on('connection', socket => {
   socket.on('answer', (data) => {
     const player = players.find(player => player.id === socket.id)
     player.points += data.points
+    player.answered = true
     io.emit('players', players)
   })
 })
