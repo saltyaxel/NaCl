@@ -3,21 +3,11 @@ import './Style.css';
 import Container from '@material-ui/core/Container';
 import { Button, makeStyles, Typography } from '@material-ui/core';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import Scoreboard from '../../components/Scoreboard/Scoreboard'
 import { useHistory } from 'react-router-dom';
 const classNames = require('classnames');
 
-let url
-if(process.env.NODE_ENV === 'development') {
-  url = 'http://localhost:8000'
-}
-if(process.env.NODE_ENV === 'production') {
-  url = 'https://live-quiz-hackday.herokuapp.com'
-}
+const url = process.env.NODE_ENV === "development" ? 'http://localhost:8000' : 'https://live-quiz-hackday.herokuapp.com'
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -69,22 +59,9 @@ const Home = () => {
       <Typography className={classNames(classes.connectedPlayersHeader, classes.header)} variant="h4">
           Scoreboard
         </Typography>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Score</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {result.map(player => (
-              <TableRow key={player.id}>
-                <TableCell component="th" scope="row">{player.name}</TableCell>
-                <TableCell align="right">{player.points}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <Scoreboard {...{
+          players: result
+        }} />
 
       <Button className={classes.button} onClick={playAgain} variant="contained" size="large" color="primary">Play Again?</Button>
     </Container>

@@ -7,21 +7,9 @@ import AnswerCard from '../../components/AnswerCard/AnswerCard'
 import io from 'socket.io-client'
 import { makeStyles, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-// import ReactCountdownClock from 'react-countdown-clock'
+import Scoreboard from '../../components/Scoreboard/Scoreboard'
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-
-let url
-if(process.env.NODE_ENV === 'development') {
-  url = 'http://localhost:8000'
-}
-if(process.env.NODE_ENV === 'production') {
-  url = 'https://live-quiz-hackday.herokuapp.com'
-}
+const url = process.env.NODE_ENV === "development" ? 'http://localhost:8000' : 'https://live-quiz-hackday.herokuapp.com'
 
 const classNames = require('classnames');
 
@@ -98,22 +86,10 @@ const Game = () => {
         <Typography className={classNames(classes.connectedPlayersHeader, classes.header)} variant="h4">
           Connected Players
         </Typography>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Score</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {players.map(player => (
-              <TableRow key={player.id}>
-                <TableCell component="th" scope="row">{player.name}</TableCell>
-                <TableCell align="right">{player.points}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+
+        <Scoreboard {...{
+          players: players
+        }}/>
 
         { !gameStarted ? (
         <div>

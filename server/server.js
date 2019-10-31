@@ -31,13 +31,16 @@ io.on('connection', socket => {
   })
 
   socket.on('start-game', async selected => {
-    const selectedQuestions = questions[selected]
-    io.emit('question', selectedQuestions[0])
-    await sleep(10000)
-    io.emit('question', selectedQuestions[1])
-    await sleep(10000)
-    result = result.slice(0)
-    io.emit('end-of-game', players)
+    const index = players.findIndex(player => player.id === socket.id)
+    if (index === 0) {
+      const selectedQuestions = questions[selected]
+      io.emit('question', selectedQuestions[0])
+      await sleep(10000)
+      io.emit('question', selectedQuestions[1])
+      await sleep(10000)
+      result = result.slice(0)
+      io.emit('end-of-game', players)
+    }
   })
 
   socket.on('disconnect', () => {
