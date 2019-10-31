@@ -2,47 +2,54 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import saltImage from '../../assets/salt-shaker.jpg'
+import SaltImage from '../../assets/salt-shaker.jpg'
+import TupacImage from '../../assets/2pac.jpg'
+import MMAImage from '../../assets/mma.jpg'
+import ReactImage from '../../assets/react.png'
 
 const useStyles = makeStyles({
   card: {
   },
   media: {
-    height: 300,
+    height: "25vh",
   },
 });
 
-export default function GameCard() {
+export default function GameCard(props) {
   const classes = useStyles();
+
+  let image = SaltImage
+  if(props.image === "MMA") {
+    image = MMAImage
+  }
+  if(props.image === "2Pac") {
+    image = TupacImage
+  }
+  if(props.image === "React") {
+    image = ReactImage
+  }
 
   return (
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea onClick={props.startGame}>
         <CardMedia
           className={classes.media}
-          image={saltImage}
+          image={image}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Game about NaCl (salt)
+            {props.header}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Test your knowledge in what you know about sodium chloride or as we know it salt.
+            {props.text}
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="large" color="primary">
-          Play
-        </Button>
-      </CardActions>
     </Card>
   );
 }
