@@ -3,6 +3,7 @@ const server = require('http').Server(app)
 const io = require('socket.io')(server)
 const questions = require('./questions.json')
 const cors = require('cors')
+const port = process.env.PORT || 8000
 
 app.use(cors())
 
@@ -54,6 +55,6 @@ io.on('connection', socket => {
   })
 })
 
-server.listen(80, () => {
-  console.log('Listening to port 80...')
+server.listen(port, () => {
+  console.log(`Listening to port ${port}...`)
 })
