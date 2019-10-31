@@ -23,6 +23,7 @@ const Home = () => {
   const [name, setName] = useState()
 
   const joinGame = () => {
+    // This needs to be restructured
     localStorage.setItem('name', name);
     history.push('/play')
   }
@@ -40,7 +41,6 @@ const Home = () => {
           margin="normal"
           variant="outlined"
           onChange={(event) => {setName(event.target.value)}}
-          value={name}
         />
         <Button className={classes.button} variant="contained" color="primary" size="large" type="submit">Join Game</Button>
         </div>

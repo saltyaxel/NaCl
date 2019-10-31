@@ -1,17 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
-import './Style.css';
-import Container from '@material-ui/core/Container';
-import GameCard from '../../components/GameCard/GameCard'
+import React, { useState, useEffect } from 'react'
+import './Style.css'
 import AnswerCard from '../../components/AnswerCard/AnswerCard'
-import io from 'socket.io-client'
-import { makeStyles, Typography } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import GameCard from '../../components/GameCard/GameCard'
 import Scoreboard from '../../components/Scoreboard/Scoreboard'
-
-const url = process.env.NODE_ENV === "development" ? 'http://localhost:8000' : 'https://live-quiz-hackday.herokuapp.com'
-
-const classNames = require('classnames');
+import { Container, makeStyles, Typography } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
+import classNames from 'classnames'
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -23,28 +18,22 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const Game = () => {
+const Game = (props) => {
+  const socket = props.socket
+  let history = useHistory()
   const classes = useStyles()
   const name = localStorage.getItem('name')
-  const [socket, setSocket] = useState(null)
   const [players, setPlayers] = useState([])
   const [gameStarted, setGameStarted] = useState(false)
   const [question, setQuestion] = useState({ question: "", 1: "1", 2: "2", 3: "3", 4: "4", correct: "4" })
   const [questionAnswered, setQuestionAnswered] = useState(false)
-  let history = useHistory()
 
   useEffect(() => {
-    const socket = io(url)
-    setSocket(socket)
-    
-    socket.on('connect', () => {
-      console.log(`Connected to server as ${name}`)
-      if(typeof name === "string") {
-        socket.emit('user', name)
-      }
-    })
-
-    socket.on('players', (data) => {
+    if(typeof name === "string") {
+      socket.emit('user', name)
+    }
+  
+    socket.on('players', data => {
       setPlayers(data)
     })
 
@@ -53,7 +42,8 @@ const Game = () => {
       setGameStarted(true)
       setQuestion(data)
     })
-    socket.on('end-of-game', data => {
+
+    socket.on('end-of-game', () => {
       history.push('/result')
       setGameStarted(false)
     })
@@ -79,7 +69,7 @@ const Game = () => {
   }
 
   return (
-    <div>
+    <div class="game">
 
       <Container maxWidth="lg">
 

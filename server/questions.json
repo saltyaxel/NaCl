@@ -14,23 +14,39 @@
 			"option_3": "China",
 			"option_4": "Australia",
 			"correct": "China"
+    },
+    {
+      "question": "What is the maximum recommended daily intake of salt in grams (according to WHO)?",
+			"option_1": "0",
+			"option_2": "2",
+			"option_3": "5",
+			"option_4": "10",
+			"correct": "5"
 		}
   ],
   "MMA": [{
-    "question": "Who has not been caught for steroids?",
-    "option_1": "Jon Jones",
-    "option_2": "Paulo Costa",
-    "option_3": "Sean O'Malley",
-    "option_4": "Tim Sylvia",
-    "correct": "Paulo Costa"
+    "question": "Who is the current lightweight champion in UFC?",
+    "option_1": "Conor McGregor",
+    "option_2": "Khabib Nurmagomedov",
+    "option_3": "Alexander Gustafsson",
+    "option_4": "Nate Diaz",
+    "correct": "Khabib Nurmagomedov"
     },
     {
-      "question": "Who is the current heavyweight champion?",
-      "option_1": "Stipe Miocic",
-      "option_2": "Daniel Cormier",
-      "option_3": "Derrick Lewis",
-      "option_4": "Francis Ngannou",
-      "correct": "Stipe Miocic"
+      "question": "What is the most common submission in UFC?",
+      "option_1": "Guillotine Choke",
+      "option_2": "Rear Naked Choke",
+      "option_3": "Armbar",
+      "option_4": "Heel Hook",
+      "correct": "Rear Naked Choke"
+    },
+    {
+      "question": "Which of these countries have not had a UFC champion?",
+      "option_1": "Nigeria",
+      "option_2": "China",
+      "option_3": "India",
+      "option_4": "Ireland",
+      "correct": "India"
     }
   ],
   "2Pac": [{
@@ -48,6 +64,14 @@
       "option_3": "1996",
       "option_4": "1991",
       "correct": "1996"
+    },
+    {
+      "question": "What is 2Pac's most played song on Spotify?",
+      "option_1": "All Eyez On Me",
+      "option_2": "Ghetto Gospel",
+      "option_3": "Changes",
+      "option_4": "Ambitionz Az A Ridah",
+      "correct": "Ambitionz Az A Ridah"
     }
   ],
   "React": [{
@@ -65,6 +89,14 @@
       "option_3": "All of the above",
       "option_4": "None of the above",
       "correct": "useHistory().push('/about')"
+    },
+    {
+      "question": "Can you pass states declared with hooks to other components?",
+      "option_1": "Yes",
+      "option_2": "Yes if you wrap it in a Context",
+      "option_3": "No, but it'll be possible with React 17.0",
+      "option_4": "No",
+      "correct": "Yes"
     }
   ]
 }
