@@ -22,7 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     const getResult = async () => {
-      const res = await fetch('http://localhost/result')
+      const res = await fetch('http://localhost:8000/result')
       const data = await res.json()
       console.log(data)
       setResult(data)

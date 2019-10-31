@@ -25,7 +25,7 @@ const Game = () => {
   let history = useHistory()
 
   useEffect(() => {
-    const socket = io('http://localhost')
+    const socket = io('http://localhost:8000')
     setSocket(socket)
     
     socket.on('connect', () => {
@@ -45,7 +45,7 @@ const Game = () => {
     })
     socket.on('end-of-game', data => {
       history.push('/result')
-      // setGameStarted(false)
+      setGameStarted(false)
     })
   }, [])
 
