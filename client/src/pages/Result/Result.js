@@ -11,6 +11,14 @@ import TableRow from '@material-ui/core/TableRow';
 import { useHistory } from 'react-router-dom';
 const classNames = require('classnames');
 
+let url
+if(process.env.NODE_ENV === 'development') {
+  url = 'http://localhost:8000'
+}
+if(process.env.NODE_ENV === 'production') {
+  url = 'https://live-quiz-hackday.herokuapp.com'
+}
+
 const useStyles = makeStyles(() => ({
   container: {
     height: "100%"
@@ -34,7 +42,7 @@ const Home = () => {
 
   useEffect(() => {
     const getResult = async () => {
-      const res = await fetch('http://localhost:8000/result')
+      const res = await fetch(url + '/result')
       const data = await res.json()
       console.log(data)
       const sortedData = data.sort( (a, b) => {

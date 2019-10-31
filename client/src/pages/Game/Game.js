@@ -15,6 +15,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+let url
+if(process.env.NODE_ENV === 'development') {
+  url = 'http://localhost:8000'
+}
+if(process.env.NODE_ENV === 'production') {
+  url = 'https://live-quiz-hackday.herokuapp.com'
+}
+
 const classNames = require('classnames');
 
 const useStyles = makeStyles(() => ({
@@ -38,7 +46,7 @@ const Game = () => {
   let history = useHistory()
 
   useEffect(() => {
-    const socket = io('http://localhost:8000')
+    const socket = io(url)
     setSocket(socket)
     
     socket.on('connect', () => {
