@@ -74,14 +74,6 @@ const Game = (props) => {
 
       <Container maxWidth="lg">
 
-        <Typography className={classNames(classes.connectedPlayersHeader, classes.header)} variant="h4">
-          Connected Players
-        </Typography>
-
-        <Scoreboard {...{
-          players: players
-        }}/>
-
         { !gameStarted ? (
         <div>
           <Typography className={classes.header} variant="h4">
@@ -152,6 +144,13 @@ const Game = (props) => {
         </div>
         </div>
         )}
+        <Typography className={classNames(classes.connectedPlayersHeader, classes.header)} variant="h4">
+          Connected Players
+        </Typography>
+
+        <Scoreboard {...{
+          players: players
+        }}/>
       </Container>
     </div>
   );
