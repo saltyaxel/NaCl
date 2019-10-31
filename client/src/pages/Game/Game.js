@@ -7,6 +7,7 @@ import Scoreboard from '../../components/Scoreboard/Scoreboard'
 import { Container, makeStyles, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import classNames from 'classnames'
+import ReactCountdownClock from 'react-countdown-clock'
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -69,7 +70,7 @@ const Game = (props) => {
   }
 
   return (
-    <div class="game">
+    <div className="game">
 
       <Container maxWidth="lg">
 
@@ -139,6 +140,15 @@ const Game = (props) => {
             postAnswer: () => { postAnswer(question.option_4) },
             color: "yellow"
           }} />
+        </div>
+        <div className="wrapperCountdown">
+          <ReactCountdownClock
+            key={question.question}
+            seconds={10}
+            color="#000"
+            alpha={0.9}
+            size={300}
+            onComplete={() => {}} />
         </div>
         </div>
         )}

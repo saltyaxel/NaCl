@@ -36,9 +36,11 @@ io.on('connection', socket => {
     if (index === 0 || player.name === 'Axel Eriksson') {
       const selectedQuestions = questions[selected]
       io.emit('question', selectedQuestions[0])
-      await sleep(10000)
+      await sleep(10500)
       io.emit('question', selectedQuestions[1])
-      await sleep(10000)
+      await sleep(10500)
+      io.emit('question', selectedQuestions[2])
+      await sleep(10500)
       result = result.slice(0)
       io.emit('end-of-game', players)
     }

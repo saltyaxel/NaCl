@@ -34,7 +34,6 @@ const Home = () => {
     const getResult = async () => {
       const res = await fetch(url + '/result')
       const data = await res.json()
-      console.log(data)
       const sortedData = data.sort( (a, b) => {
         if(a.points < b.points) {
           return 1
