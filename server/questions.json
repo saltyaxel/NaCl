@@ -1,0 +1,70 @@
+{
+	"Salt": [{
+			"question": "What is the chemical formula for salt?",
+			"option_1": "H2O",
+			"option_2": "NaCl",
+			"option_3": "CO2",
+			"option_4": "C17H19NO3",
+			"correct": "NaCl"
+		},
+		{
+			"question": "Which country produces the most salt?",
+			"option_1": "USA",
+			"option_2": "India",
+			"option_3": "China",
+			"option_4": "Australia",
+			"correct": "China"
+		}
+  ],
+  "MMA": [{
+    "question": "Who has not been caught for steroids?",
+    "option_1": "Jon Jones",
+    "option_2": "Paulo Costa",
+    "option_3": "Sean O'Malley",
+    "option_4": "Tim Sylvia",
+    "correct": "Paulo Costa"
+    },
+    {
+      "question": "Who is the current heavyweight champion?",
+      "option_1": "Stipe Miocic",
+      "option_2": "Daniel Cormier",
+      "option_3": "Derrick Lewis",
+      "option_4": "Francis Ngannou",
+      "correct": "Stipe Miocic"
+    }
+  ],
+  "2Pac": [{
+      "question": "Besides 2Pac, he had another famous stage name. What?",
+      "option_1": "Ferrari",
+      "option_2": "6Pack",
+      "option_3": "Frank White",
+      "option_4": "Makaveli",
+      "correct": "Makaveli"
+    },
+    {
+      "question": "What year did he die?",
+      "option_1": "2000",
+      "option_2": "1992",
+      "option_3": "1996",
+      "option_4": "1991",
+      "correct": "1996"
+    }
+  ],
+  "React": [{
+      "question": "useEffect can be though as the combination of the following lifecycle methods except one, which?",
+      "option_1": "componentWillUnmount()",
+      "option_2": "componentDidMount()",
+      "option_3": "componentDidUpdate()",
+      "option_4": "componentWillUpdate()",
+      "correct": "componentWillUnmount()"
+    },
+    {
+      "question": "Which alternative is correct for using the useHistory Hook?",
+      "option_1": "useHistory().push('/about')",
+      "option_2": "useHistory().append('/about')",
+      "option_3": "All of the above",
+      "option_4": "None of the above",
+      "correct": "useHistory().push('/about')"
+    }
+  ]
+}
