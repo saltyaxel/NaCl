@@ -21,6 +21,7 @@ const useStyles = makeStyles(() => ({
 
 const Game = (props) => {
   const socket = props.socket
+  console.log(socket)
   let history = useHistory()
   const classes = useStyles()
   const name = localStorage.getItem('name')

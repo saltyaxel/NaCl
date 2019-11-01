@@ -22,8 +22,9 @@ const Home = () => {
   let history = useHistory()
   const [name, setName] = useState()
 
-  const joinGame = () => {
+  const joinGame = (e) => {
     // This needs to be restructured
+    e.preventDefault()
     localStorage.setItem('name', name);
     history.push('/play')
   }
