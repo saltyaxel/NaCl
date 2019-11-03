@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
 import { useHistory } from 'react-router-dom';
 import { Button, makeStyles, Typography } from '@material-ui/core';
+import { useStateValue } from '../../state';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -17,15 +18,20 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const Home = () => {
+const Home = () => {  
   const classes = useStyles()
   let history = useHistory()
+
+  const [, dispatch] = useStateValue();
   const [name, setName] = useState()
 
   const joinGame = (e) => {
-    // This needs to be restructured
     e.preventDefault()
-    localStorage.setItem('name', name);
+    dispatch({
+      type: 'changeName',
+      newName: name
+    })
+    localStorage.setItem('name', name)
     history.push('/play')
   }
 

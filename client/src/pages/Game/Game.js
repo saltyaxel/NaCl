@@ -8,6 +8,7 @@ import { Container, makeStyles, Typography } from '@material-ui/core'
 import { useHistory } from 'react-router-dom'
 import classNames from 'classnames'
 import ReactCountdownClock from 'react-countdown-clock'
+import { useStateValue } from '../../state';
 
 const useStyles = makeStyles(() => ({
   header: {
@@ -19,12 +20,10 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const Game = (props) => {
-  const socket = props.socket
-  console.log(socket)
+const Game = () => {
+  const [{ name, socket }] = useStateValue();
   let history = useHistory()
   const classes = useStyles()
-  const name = localStorage.getItem('name')
   const [players, setPlayers] = useState([])
   const [gameStarted, setGameStarted] = useState(false)
   const [question, setQuestion] = useState({ question: "", 1: "1", 2: "2", 3: "3", 4: "4", correct: "4" })
